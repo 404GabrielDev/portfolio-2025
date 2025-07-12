@@ -1,0 +1,68 @@
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 5rem;
+}
+
+#title-contactForm {
+  text-align: center;
+  color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+form input {
+  height: 2rem;
+  width: 90%;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  background-color: transparent;
+  border-bottom: 2px solid rgb(180, 180, 180);
+  transition: border-color 0.3s ease;
+}
+
+form textarea {
+  background-color: transparent;
+  border: none;
+  height: 5rem;
+  width: 90%;
+  border-bottom: 2px solid rgb(180, 180, 180);
+  color: #fff;
+  font-size: 20px;
+  transition: border-color 0.3s ease;
+}
+/*mexendo no focus dos inputs*/
+form input:focus,
+form textarea:focus {
+  outline: none;
+  border-bottom: 2px solid #fff; /* muda a cor da borda ao focar */
+}
+
+/*mexendo no placeholder dos inputs*/
+form input::placeholder,
+form textarea::placeholder {
+  font-size: 1.1rem; /* ou 16px, 18px, etc */
+  color: #ccc; /* opcional: muda a cor também */
+}
+
+
+#btn-submitEmail {
+  width: 12rem;
+  height: 2.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color .5s ease, color .5s ease, font-weight .5s ease, font-size .5s ease;
+}
+
+#btn-submitEmail:hover {
+    background-color: #f70;
+    color: #000;
+    font-weight: bold;
+    font-size: 15px;
+}
