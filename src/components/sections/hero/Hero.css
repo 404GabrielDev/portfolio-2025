@@ -1,0 +1,90 @@
+header {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+header p {
+  width: 100%;
+  color: #fff;
+  font-size: 3rem;
+  padding: 0 1rem;
+  font-weight: bold;
+}
+
+header video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+#title-developer {
+  display: flex;
+  justify-content: end;
+}
+
+#title-engineer {
+  display: flex;
+  justify-content: end;
+}
+
+/*Container overlay*/
+.container-overlay {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  gap: 1.2rem;
+}
+
+@media (min-width: 620px) {
+  .container-overlay {
+    width: auto;
+    width: 90%;
+    gap: 0;
+  }
+}
+
+@media (min-width: 720px) {
+  .container-overlay {
+    width: auto;
+    width: 70%;
+    gap: 1.5rem;
+  }
+
+  header p {
+    font-size: 4rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  header p {
+    font-size: 5rem;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container-overlay {
+    width: auto;
+    width: 100%;
+    gap: 0;
+  }
+
+  .container-overlay {
+    width: auto;
+    width: 80%;
+  }
+
+  header p {
+    font-size: 9rem;
+    padding: 1rem;
+  }
+}
