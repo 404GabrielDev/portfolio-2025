@@ -44,7 +44,7 @@
 }
 
 .container-iconsStack {
-  width: 50%;
+  width: 60%;
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
@@ -82,16 +82,17 @@
 .panel {
   flex: 0 0 100vw; /* Cada painel ocupa 100% da tela (1 tela por card) */
   max-width: 100vw;
-  height: 100%;   /*estava 90vh*/
+  height: 90vh;   /*estava 90vh*/
   background: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
+  font-size: 1.5rem; /*fix font size in different sizes*/
   padding: 2rem; /*Verificar melhor padding*/
   border-radius: 0.5rem;
   gap: 1rem;
+  text-align: center;
 }
 
 .panel button {
@@ -140,6 +141,10 @@
   #aboutMe {
     font-size: 1.5rem;
   }
+
+  .panel {
+    font-size: 2rem;
+  }
 }
 
 @media (min-width: 1000px) {
@@ -182,6 +187,7 @@
     flex: 0 0 30vw;
     height: 80%; /*was 600px*/
     text-align: center;
+    font-size: 1.5rem;
   }
 
   .panels {

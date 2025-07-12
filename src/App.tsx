@@ -11,6 +11,7 @@ import ContactForm from "./components/layout/email/Email";
 import AOS from "aos";
 import "aos/dist/aos.css"; // You can also use <link> for styles
 import { scroller } from "react-scroll";
+import { delay } from "motion";
 
 AOS.init({
   // Global settings:
@@ -35,6 +36,8 @@ AOS.init({
 
 function App() {
   const lenisRef = useRef(null);
+  useAutoScrollUnlessUserInteracts();
+
 
   useEffect(() => {
     // Create Lenis instance
@@ -52,13 +55,14 @@ function App() {
 
     requestAnimationFrame(raf);
 
-    const timeout = setTimeout(() => {
+
+    /*const timeout = setTimeout(() => {
       scroller.scrollTo("header", {
         duration: 800,
         delay: 0,
         smooth: "easeInOutQuart",
-      })
-    }, 3000)
+      });
+    }, 3500); */
 
     // Cleanup on unmount
     return () => {
@@ -68,6 +72,34 @@ function App() {
       }
     };
   }, []);
+
+  function useAutoScrollUnlessUserInteracts() {
+    useEffect(() => {
+      const timeout = setTimeout(() => {
+        scroller.scrollTo("header", {
+          duration: 800,
+          delay: 0,
+          smooth: "easeInOutQuart",
+        });
+      }, 3500);
+
+      const cancelScroll = () => {
+        clearTimeout(timeout);
+        window.removeEventListener("pointerdown", cancelScroll);
+        window.removeEventListener("wheel", cancelScroll);
+        window.removeEventListener("keydown", cancelScroll);
+      };
+
+      window.addEventListener("pointerdown", cancelScroll, { once: true });
+      window.addEventListener("wheel", cancelScroll, { once: true });
+      window.addEventListener("keydown", cancelScroll, { once: true });
+
+      return () => {
+        clearTimeout(timeout);
+        cancelScroll();
+      };
+    });
+  }
 
   return (
     <>
@@ -83,9 +115,5 @@ function App() {
 
 export default App;
 
-
-//cursor pointer nos botões
-//fontes legais
-//animação pra descer a pagina e verificar scrolls referenciando botões
-//fazer repositorio git
+//tamanho dos cards atrapalhando layout  em diferentes tamanhos de telas
 //subir denovo npm run deploy showroom | relax
