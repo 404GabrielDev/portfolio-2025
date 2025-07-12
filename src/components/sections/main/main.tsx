@@ -34,6 +34,30 @@ function About() {
   const stackRef = useRef(null);
   const isStackInView = useInView(stackRef, { once: false, amount: 0.1 });
 
+  const icons = [
+    SiReact,
+    SiNodedotjs,
+    SiMongodb,
+    SiExpress,
+    SiJavascript,
+    SiAngular,
+    SiDocker,
+    FaJava,
+    SiSpringboot,
+  ];
+
+  const colors = [
+    "#61DAFB", // React - light blue
+    "#339933", // Node.js - green
+    "#4DB33D", // MongoDB - green
+    "#ffffffff", // Express - black (or grey)
+    "#F7DF1E", // JavaScript - yellow
+    "#DD0031", // Angular - red
+    "#0db7ed", // Docker - blue
+    "#007396", // Java - blue
+    "#6DB33F", // Spring Boot - green
+  ];
+
   //custom animations for container-iconsStack
   const iconVariants = {
     hidden: { opacity: 0, x: 90 },
@@ -145,19 +169,23 @@ function About() {
             Stack de Desenvolvimento
           </motion.p>
           <div className="container-iconsStack" ref={stackRef}>
-            {[SiReact, SiNodedotjs, SiMongodb, SiExpress, SiJavascript, SiAngular, SiDocker, FaJava, SiSpringboot].map(
-              (Icon, index) => (
-                <motion.div
-                  key={index}
-                  custom={index}
-                  variants={iconVariants}
-                  initial="hidden"
-                  animate={isStackInView ? controls : false}
-                >
-                  <Icon id="icon" />
-                </motion.div>
-              )
-            )}
+            {icons.map((Icon, index) => (
+              <motion.div
+                key={index}
+                custom={index}
+                variants={iconVariants}
+                initial="hidden"
+                animate={isStackInView ? controls : false}
+              >
+                <Icon
+                  style={{
+                    color: colors[index],
+                    width: "40px",
+                    height: "40px",
+                  }}
+                />
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
@@ -175,7 +203,7 @@ function About() {
           <motion.div
             initial={{ opacity: 0, x: 90 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.5}}
+            transition={{ duration: 0.5 }}
             className="panel"
           >
             <p>Portal de Vagas simplificado</p>
