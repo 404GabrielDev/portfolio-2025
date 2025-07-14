@@ -1,7 +1,6 @@
 import "./Email.css";
 import { useRef } from "react";
 import emailJs from "emailjs-com";
-import { motion, useInView } from "framer-motion";
 import { Element } from 'react-scroll';
 
 export default function ContactForm() {

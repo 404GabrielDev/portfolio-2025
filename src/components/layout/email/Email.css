@@ -40,14 +40,14 @@ form textarea {
 form input:focus,
 form textarea:focus {
   outline: none;
-  border-bottom: 2px solid #fff; /* muda a cor da borda ao focar */
+  border-bottom: 2px solid #fff;
 }
 
-/*mexendo no placeholder dos inputs*/
+
 form input::placeholder,
 form textarea::placeholder {
-  font-size: 1.1rem; /* ou 16px, 18px, etc */
-  color: #ccc; /* opcional: muda a cor também */
+  font-size: 1.1rem; 
+  color: #ccc; 
 }
 
 
