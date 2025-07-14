@@ -130,8 +130,3 @@ function App() {
 }
 
 export default App;
-
-//testar nas 3 telas (testar denovo só pra confirmar)
-//fazer o commit
-//revisar geral
-//fazer deploy pro github pages
