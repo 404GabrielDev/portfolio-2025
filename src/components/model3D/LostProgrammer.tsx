@@ -1,18 +1,36 @@
 import "./LostProgrammer.css";
 
-import { Canvas, useFrame, useThree, type ThreeElement } from "@react-three/fiber";
-import { OrbitControls, Environment, useGLTF } from "@react-three/drei";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import {
+  OrbitControls,
+  Environment,
+  useGLTF,
+  useProgress,
+} from "@react-three/drei";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { useEffect, useRef } from "react";
-import { Vector3 } from "three";
-import type { RefObject } from 'react';
-import { OrbitControls as ThreeOrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { Mesh, Vector3 } from "three";
+import type { RefObject } from "react";
+import { OrbitControls as ThreeOrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { UseLoading } from "../../context/loadingContext/LoadingContext";
 
 function LostProgrammer() {
-  const gltf = useGLTF("./models/lost_programmer.glb");
-  const ref = useRef(null);
+  const gltf = useGLTF("/models/lost_programmer.glb");
+  const ref = useRef<Mesh>(null);
   const rotationSpeed = useRef(0.1);
   const decelerating = useRef(true);
+  const { loaded } = useProgress();
+  const { loadingPage, setLoadingPage } = UseLoading();
+
+  useEffect(() => {
+    if (loaded) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            setLoadingPage(false);
+        });
+      });
+    }
+  });
 
   useFrame(() => {
     if (!ref.current) return;
@@ -20,19 +38,17 @@ function LostProgrammer() {
     // Rotação contínua
     ref.current.rotation.y += rotationSpeed.current;
 
-    // Desacelera progressivamente
     if (decelerating.current) {
-      rotationSpeed.current *= 0.599; // desacelera suavemente
+      rotationSpeed.current *= 0.599; // variavel que desacelera a rotação
 
       if (rotationSpeed.current < 0.003) {
-        rotationSpeed.current = 0.001; // define a rotação lenta contínua
-        decelerating.current = false;  // fim da desaceleração
+        rotationSpeed.current = 0.001; // define a rotação ficando lenta gradualmente
+        decelerating.current = false; // fim da "lentidão gradualmente"
       }
     }
   });
 
-    return <primitive object={gltf.scene} scale={1.0} ref={ref}/>;
-
+  return <primitive object={gltf.scene} scale={1.0} ref={ref} />;
 }
 
 type CameraAnimatorProps = {
@@ -76,7 +92,7 @@ function CameraAnimator({ orbitControlsRef }: CameraAnimatorProps) {
 }
 
 export default function ModelViewer() {
-    const orbitControlsRef = useRef<ThreeOrbitControls | null>(null);
+  const orbitControlsRef = useRef<ThreeOrbitControls | null>(null);
 
   return (
     <div className="container-modelViewer">
@@ -91,7 +107,7 @@ export default function ModelViewer() {
           <Bloom
             luminanceThreshold={0.3} // Só brilha se for mais claro que isso
             luminanceSmoothing={0.9} // Suaviza a transição do brilho
-            intensity={2} // Quanto vai brilhar
+            intensity={2} // o quão intenso o brilho é
           />
         </EffectComposer>
       </Canvas>
