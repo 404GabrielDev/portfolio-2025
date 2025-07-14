@@ -73,23 +73,26 @@
 .panels {
   display: flex;
   height: 100%;
-  width: max-content; /* ← IMPORTANTE: largura exata baseada no conteúdo (3 painéis) */
-  gap: 3rem;
+  width: max-content; /*largura exata baseada no conteúdo*/
   justify-content: center;
   align-items: center;
 }
 
+.panels > *:not(:last-child) {
+  margin-right: 3rem;
+}
+
 .panel {
-  flex: 0 0 100vw; /* Cada painel ocupa 100% da tela (1 tela por card) */
+  flex: 0 0 100vw;
   max-width: 100vw;
-  height: 90vh;   /*estava 90vh*/
+  height: 90vh;
   background: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: 1.5rem; /*fix font size in different sizes*/
-  padding: 2rem; /*Verificar melhor padding*/
+  padding: 2rem;
   border-radius: 0.5rem;
   gap: 1rem;
   text-align: center;
@@ -100,11 +103,11 @@
   color: #fff;
   border: none;
   border: 2px solid transparent;
-  border-radius: .5rem;
-  padding: .5rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
   font-weight: bold;
   cursor: pointer;
-  transition: scale .5s ease, border .5s ease;
+  transition: scale 0.5s ease, border 0.5s ease;
 }
 
 .panel button:hover {
@@ -117,7 +120,7 @@
   object-fit: contain;
   object-position: center;
   border: 2px solid rgb(16, 16, 232);
-  border-radius: .5rem;
+  border-radius: 0.5rem;
 }
 
 #btnRepository {
@@ -181,8 +184,7 @@
     font-size: 3rem;
   }
 
-  /*tentando arrumar os cards no desktop*/
-
+  /* cards no desktop*/
   .panel {
     flex: 0 0 30vw;
     height: 80%; /*was 600px*/
@@ -192,7 +194,7 @@
 
   .panels {
     width: auto;
-    width: 200vw;
+    width: 210vw; /*estava 200 (teste )*/
     gap: initial;
     gap: 8rem;
     justify-content: normal;

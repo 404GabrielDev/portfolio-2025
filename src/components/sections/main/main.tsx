@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import Lenis from "@studio-freight/lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./main.css";
@@ -23,13 +22,11 @@ gsap.registerPlugin(ScrollTrigger);
 
 function About() {
   const ref = useRef<HTMLDivElement>(null);
-  const containerStack = useRef<HTMLDivElement>(null);
-  const divRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, amount: 0.05 });
   const width = UseWindowWidth();
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowWidth] = useState(window.innerWidth);
   const controls = useAnimation();
   const stackRef = useRef(null);
   const isStackInView = useInView(stackRef, { once: false, amount: 0.1 });
@@ -47,18 +44,18 @@ function About() {
   ];
 
   const colors = [
-    "#61DAFB", // React - light blue
-    "#339933", // Node.js - green
-    "#4DB33D", // MongoDB - green
-    "#ffffffff", // Express - black (or grey)
-    "#F7DF1E", // JavaScript - yellow
-    "#DD0031", // Angular - red
-    "#0db7ed", // Docker - blue
-    "#007396", // Java - blue
-    "#6DB33F", // Spring Boot - green
+    "#61DAFB", // React
+    "#339933", // Node.js
+    "#4DB33D", // MongoDB
+    "#ffffffff", // Express
+    "#F7DF1E", // JavaScript
+    "#DD0031", // Angular
+    "#0db7ed", // Docker
+    "#007396", // Java
+    "#6DB33F", // Spring Boot
   ];
 
-  //custom animations for container-iconsStack
+
   const iconVariants = {
     hidden: { opacity: 0, x: 90 },
     visible: (i: number) => ({
@@ -66,7 +63,7 @@ function About() {
       x: 0,
       transition: {
         duration: 1,
-        delay: i * 0.3, // delay escalonado por índice
+        delay: i * 0.3, // delay aumenta a cada indice
       },
     }),
   };
@@ -80,11 +77,11 @@ function About() {
   useEffect(() => {
     if (!containerWidth) return;
 
-    // Distance to scroll = total container width - viewport width
+    
     const mobileScrollOffset = width < 1000 ? 80 : 0;
     let scrollDistance = containerWidth - windowWidth - mobileScrollOffset;
     const lastPanel = containerRef.current?.lastElementChild as HTMLElement;
-    // Guard against negative or zero scroll distances
+
     if (scrollDistance <= 0) return;
 
     if (width < 1000 && lastPanel) {
@@ -93,15 +90,15 @@ function About() {
     }
 
     const isMobile = width < 1000;
-    // 1️⃣ ScrollTrigger para a animação (começa cedo)
+  //lógica pra animação dentro do começar
     gsap.to(containerRef.current, {
       x: -scrollDistance,
       ease: "none",
       scrollTrigger: {
-        trigger: width < 1000 ? "#title-sectionCards" : ".container-stack", // 👈 começa quando a stack aparece (ponta visível)
-        start: width < 1000 ? "top top" : "top bottom", // 👈 ou ajuste com top 80%, top 90%...
+        trigger: width < 1000 ? "#title-sectionCards" : ".container-stack",
+        start: width < 1000 ? "top top" : "top bottom",
         endTrigger: "#title-contactForm",
-        end: `+=${scrollDistance + 100}`,
+        end: width < 1000 ? `+=${scrollDistance + 100}` : `top 1%`,
         scrub: true,
         markers: false,
       },
@@ -109,12 +106,12 @@ function About() {
 
     console.log("valor do width", width);
 
-    // 2️⃣ ScrollTrigger só para fixar os cards no meio
+    // ScrollTrigger só para fixar os cards no meio (pin)
     ScrollTrigger.create({
-      trigger: ".panels", // 👈 os próprios cards
-      start: "top 1%", // 👈 quando os cards chegarem no meio da tela
-      end: width < 1000 ? `+=${scrollDistance + 100}` : "bottom 70%",
-      pin: ".horizontal-section", // 👈 só ativa o pin aqui
+      trigger: ".panels",
+      start: "top 1%",
+      end: width < 1000 ? `+=${scrollDistance + 100}` : "bottom 5%", //tava bottom 70
+      pin: ".horizontal-section",
       scrub: true,
       markers: false,
     });
@@ -128,7 +125,7 @@ function About() {
     if (isStackInView) {
       controls.start("visible");
     } else {
-      controls.start("hidden"); // opcional: se quiser resetar animação ao sair
+      controls.start("hidden");
     }
   }, [isStackInView, controls]);
 
@@ -282,5 +279,3 @@ function About() {
 }
 
 export default About;
-
-//Separar as animações, tudo funcionando, mas separar para maior imersão e entender o fluxo.
