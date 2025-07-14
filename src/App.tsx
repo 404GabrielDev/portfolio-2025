@@ -9,9 +9,16 @@ import Lenis from "lenis";
 import ContactForm from "./components/layout/email/Email";
 
 import AOS from "aos";
-import "aos/dist/aos.css"; // You can also use <link> for styles
+import "aos/dist/aos.css";
 import { scroller } from "react-scroll";
-import { delay } from "motion";
+import { UseLoading } from "./context/loadingContext/LoadingContext";
+import LoadingPage from "./components/ui/loadingPage/LoadingPage";
+import ModelPreloader from "./components/ui/ModelPreloader/ModelPreLoader";
+import { AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
+
+
+//AOS conforme documentação
 
 AOS.init({
   // Global settings:
@@ -35,34 +42,23 @@ AOS.init({
 });
 
 function App() {
-  const lenisRef = useRef(null);
+  const lenisRef = useRef<Lenis>(null);
   useAutoScrollUnlessUserInteracts();
-
+  const { loadingPage, loadingComponents } = UseLoading();
 
   useEffect(() => {
-    // Create Lenis instance
     lenisRef.current = new Lenis({
       smooth: true,
-      // You can configure options here, e.g.:
-      // duration: 1.2,
-      // easing: (t) => t, // linear easing, but you can use easeInOutQuad or others
     });
 
-    function raf(time) {
-      lenisRef.current.raf(time);
+    function raf(time:number) {
+      if (lenisRef.current) {
+        lenisRef.current.raf(time);
+      }
       requestAnimationFrame(raf);
     }
 
     requestAnimationFrame(raf);
-
-
-    /*const timeout = setTimeout(() => {
-      scroller.scrollTo("header", {
-        duration: 800,
-        delay: 0,
-        smooth: "easeInOutQuart",
-      });
-    }, 3500); */
 
     // Cleanup on unmount
     return () => {
@@ -81,7 +77,7 @@ function App() {
           delay: 0,
           smooth: "easeInOutQuart",
         });
-      }, 3500);
+      }, 2500);
 
       const cancelScroll = () => {
         clearTimeout(timeout);
@@ -103,17 +99,39 @@ function App() {
 
   return (
     <>
-      <Navbar />
-      <ModelViewer />
-      <Hero />
-      <About />
-      <ContactForm />
-      <Footer />
+    {/*teste em componente principal */}
+      <ModelPreloader />
+      <AnimatePresence initial={true}>
+        {loadingPage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            className="motion-loading"
+          >
+            {loadingPage && <LoadingPage />}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {loadingComponents && (
+        <>
+          <Navbar />
+          <ModelViewer />
+          <Hero />
+          <About />
+          <ContactForm />
+          <Footer />
+        </>
+      )}
     </>
   );
 }
 
 export default App;
 
-//tamanho dos cards atrapalhando layout  em diferentes tamanhos de telas
-//subir denovo npm run deploy showroom | relax
+//testar nas 3 telas (testar denovo só pra confirmar)
+//fazer o commit
+//revisar geral
+//fazer deploy pro github pages
