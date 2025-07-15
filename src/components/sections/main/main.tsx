@@ -89,7 +89,6 @@ function About() {
       scrollDistance = lastCardOffset - windowWidth;
     }
 
-    const isMobile = width < 1000;
   //lógica pra animação dentro do começar
     gsap.to(containerRef.current, {
       x: -scrollDistance,

@@ -5,7 +5,7 @@ function Footer() {
   return (
     <footer>
       <div className="container-logo">
-        <img src="/images/Logo.webp" alt="logo" />
+        <img src={`${import.meta.env.BASE_URL}images/Logo.webp`} alt="logo" />
       </div>
 
       <div className="container-contact">

@@ -11,16 +11,17 @@ import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { useEffect, useRef } from "react";
 import { Mesh, Vector3 } from "three";
 import type { RefObject } from "react";
+// @ts-expect-error lib has no types
 import { OrbitControls as ThreeOrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { UseLoading } from "../../context/loadingContext/LoadingContext";
 
 function LostProgrammer() {
-  const gltf = useGLTF("/models/lost_programmer.glb");
+  const gltf = useGLTF(`${import.meta.env.BASE_URL}models/lost_programmer.glb`);
   const ref = useRef<Mesh>(null);
   const rotationSpeed = useRef(0.1);
   const decelerating = useRef(true);
   const { loaded } = useProgress();
-  const { loadingPage, setLoadingPage } = UseLoading();
+  const { setLoadingPage } = UseLoading();
 
   useEffect(() => {
     if (loaded) {

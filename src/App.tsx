@@ -47,9 +47,7 @@ function App() {
   const { loadingPage, loadingComponents } = UseLoading();
 
   useEffect(() => {
-    lenisRef.current = new Lenis({
-      smooth: true,
-    });
+    lenisRef.current = new Lenis();
 
     function raf(time:number) {
       if (lenisRef.current) {

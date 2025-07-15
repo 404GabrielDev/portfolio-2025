@@ -6,7 +6,7 @@ import { Element } from 'react-scroll';
 export default function ContactForm() {
   const formRef = useRef<HTMLFormElement | null>(null);
 
-  const sendEmail = (e) => {
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!formRef.current) return;
