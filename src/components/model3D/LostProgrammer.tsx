@@ -27,7 +27,7 @@ function LostProgrammer() {
     if (loaded) {
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-            setLoadingPage(false);
+          setLoadingPage(false);
         });
       });
     }

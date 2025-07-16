@@ -6,10 +6,10 @@ function ModelPreloader() {
   const { setLoadingComponents } = UseLoading();
 
 
-  useGLTF.preload("/models/lost_programmer.glb");
+  useGLTF.preload(`${import.meta.env.BASE_URL}models/lost_programmer.glb`);
 
 
-  const { scene } = useGLTF("/models/lost_programmer.glb");
+  const { scene } = useGLTF(`${import.meta.env.BASE_URL}models/lost_programmer.glb`);
 
   useEffect(() => {
     if (scene) {

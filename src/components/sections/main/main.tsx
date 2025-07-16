@@ -203,7 +203,7 @@ function About() {
             className="panel"
           >
             <p>Portal de Vagas simplificado</p>
-            <img src="/printsProject/PageHome.png" alt="project-portal-job" />
+            <img src={`${import.meta.env.BASE_URL}printsProject/PageHome.png`} alt="project-portal-job" />
             <p>
               Plataforma de vagas com login via Google, onde usuários criam,
               editam e se candidatam a oportunidades. Interface simples e
@@ -227,7 +227,7 @@ function About() {
             className="panel"
           >
             <p>Showroom</p>
-            <img src="/printsProject/homePage.png" alt="project-showroom" />
+            <img src={`${import.meta.env.BASE_URL}printsProject/homePage.png`} alt="project-showroom" />
             <p>
               Página interativa em 3D com modelos de carros rotacionáveis.
               Desenvolvida com React Three Fiber, focada em visual moderno e
@@ -252,7 +252,7 @@ function About() {
           >
             <p>Marketplace</p>
             <img
-              src="/printsProject/Screenshot1.png"
+              src={`${import.meta.env.BASE_URL}printsProject/Screenshot1.png`}
               alt="project-marketplace"
             />
             <p>
