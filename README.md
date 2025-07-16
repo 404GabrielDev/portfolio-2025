@@ -43,7 +43,7 @@ Este é meu portfólio profissional desenvolvido com tecnologias modernas do eco
 ### 🌐 Demonstração ao Vivo
 Acesse o portfólio completo em:
 
-🔗 https://github.com/404GabrielDev/portfolio-2025
+🔗  https://404gabrieldev.github.io/portfolio-2025/
 
 Explore os projetos, animações e o modelo 3D diretamente no navegador!
 
